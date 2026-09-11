@@ -1,101 +1,108 @@
-<img width="1280" height="640" alt="git (1)" src="https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd" />
+# FacePay 🎯
 
-
-
-# [Project Name] 🎯
-
+A face-recognition based mock UPI payment system built for the TinkerHub Useless Projects hackathon.
 
 ## Basic Details
-### Team Name: [Name]
 
+### Team Name: FacePay Team
 
 ### Team Members
-- Team Lead:Me 
+- Team Lead: Deone George
 
 ### Project Description
-[2-3 lines about what your project does]
+FacePay is a "useless" but technically complete payment system where you scan a person's face to identify them, then send a mock UPI payment. The face recognition links to a registered user identity, and the payment produces a mock UPI receipt. It solves the ridiculous problem of "what if Venmo required a selfie every time?"
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Sending money is too easy. Where's the friction? Where's the biometric theater? We need to make sure the person receiving money actually has a face.
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Scan a face → match to registered identity → enter amount → get a mock UPI receipt. Built with InsightFace for embeddings, FastAPI for the backend, React for the frontend, and SQLite for persistence. Works even without GPU/model weights via a deterministic SHA-256 fallback.
 
 ## Technical Details
-### Technologies/Components Used
-For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
 
-For Hardware:
-- [List main components]
-- [List specifications]
-- [List tools required]
+### Technologies/Components Used
+
+**For Software:**
+- **Languages:** Python 3.11+, JavaScript (ES2022)
+- **Frameworks:** FastAPI, React 18, Vite
+- **Libraries:** InsightFace (face detection/embedding), NumPy, SQLite3, Pydantic v2
+- **Tools:** Uvicorn, npm, Git
+
+**For Hardware:**
+- Webcam (for face capture)
+- Any machine with Python 3.11+ and Node 18+
 
 ### Implementation
-For Software:
-# Installation
-[commands]
 
-# Run
-[commands]
+**Architecture:**
+- **Client Layer:** React UI served via Vite, communicates with backend over HTTP/JSON
+- **API Layer:** FastAPI server routes requests to three services
+- **Service Layer:**
+  - Face Engine — facial recognition via InsightFace (or deterministic fallback)
+  - User Service — manages users in SQLite
+  - Payment Service — records mock payments in SQLite
+- **Data Flow:** Face Engine output + User Service data → Identity resolution → Payment Service → Payment Receipt
+
+**Installation:**
+
+```bash
+# Backend
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# Frontend
+cd ../frontend
+npm install
+```
+
+**Run:**
+
+```bash
+# Terminal 1: Backend
+cd backend
+source .venv/bin/activate
+uvicorn app:app --reload
+
+# Terminal 2: Frontend
+cd frontend
+npm run dev
+```
+
+Then open http://localhost:5173
 
 ### Project Documentation
-For Software:
 
-# Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+#### Screenshots
+![Face Scan](docs/screenshots/face-scan.png)
+*Face scan screen with webcam preview and capture button*
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Payment Form](docs/screenshots/payment-form.png)
+*Payment form showing identified user and amount entry*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Receipt](docs/screenshots/receipt.png)
+*Mock UPI payment receipt with transaction reference*
 
-# Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
-
-For Hardware:
-
-# Schematic & Circuit
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-# Build Photos
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
+#### Diagrams
+![Workflow](docs/diagrams/workflow.png)
+*Architecture diagram showing client → API → services → data flow*
 
 ### Project Demo
-# Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
 
-# Additional Demos
-[Add any extra demo materials/links]
+**Video:** [Add your demo video link here]
+
+**What the video demonstrates:**
+1. User registration with face capture
+2. Face scan identification flow
+3. Payment form with amount and payee UPI
+4. Mock UPI receipt generation
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Deone George: Full-stack implementation, architecture design, face recognition integration, UI/UX
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
 
 ![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)
 ![Static Badge](https://img.shields.io/badge/UselessProjects--26-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)
-
-
-
