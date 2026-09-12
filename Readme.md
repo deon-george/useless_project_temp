@@ -193,6 +193,7 @@ The entire web interface is optimized for mobile touch devices and all desktop r
 ```
 
 ---
+## Screenshots
 
 ## 📂 Physical Calibration Datasets
 
