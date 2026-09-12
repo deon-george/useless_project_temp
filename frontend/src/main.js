@@ -1,7 +1,10 @@
 // MayoMandi Vanilla JS App with Traditional Computer Vision & Classical NumPy Regression
 import heroImage from "./assets/hero.png";
 
-const API_BASE = import.meta.env.VITE_API_URL || "/api";
+const configuredApiUrl = import.meta.env.VITE_API_URL?.trim();
+const API_BASE = configuredApiUrl
+  ? `${configuredApiUrl.replace(/\/+$/, "").replace(/\/health$/, "")}/api`
+  : "/api";
 
 // --- API Functions ---
 async function apiCalculate(data) {
