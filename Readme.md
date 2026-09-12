@@ -34,6 +34,7 @@ Nobody agrees on the correct metric ratio of mayonnaise required to accompany au
 An end-to-end traditional computer vision pipeline paired with classical NumPy least-squares regression. Users can snap photos on mobile or desktop; OpenCV isolates food boundaries via multi-color space thresholding and metric reference scaling; NumPy predicts edible quantities; and a fully mobile-responsive interface delivers instantaneous gastronomic verdicts.
 
 ---
+### Google Video Link : https://drive.google.com/file/d/1L2Tohva75o418UeFcd9GkfdK6wYQk2gS/view?usp=sharing
 
 ## ⚠️ Important Scientific Limitation
 
