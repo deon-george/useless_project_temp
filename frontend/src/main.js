@@ -1,5 +1,5 @@
 // MayoMandi Vanilla JS App with Traditional Computer Vision & Classical NumPy Regression
-const API_BASE = "/api";
+const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 // --- API Functions ---
 async function apiCalculate(data) {
