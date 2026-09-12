@@ -1,4 +1,6 @@
 // MayoMandi Vanilla JS App with Traditional Computer Vision & Classical NumPy Regression
+import heroImage from "./assets/hero.png";
+
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
 // --- API Functions ---
@@ -282,7 +284,7 @@ function renderHome() {
         </div>
       </div>
       <div class="hero-art">
-        <img src="/src/assets/hero.png" alt="MayoMandi — mandi and mayo" class="mandi-image" />
+        <img src="${heroImage}" alt="MayoMandi — mandi and mayo" class="mandi-image" />
         <div class="brush"></div>
         <div class="brush-text">Mandi<br>+<br>Mayo<br>= Happiness ❤️</div>
         <div class="annotation one">Traditional CV<br>Rice Estimation! <span class="annotation-arrow">↘</span></div>

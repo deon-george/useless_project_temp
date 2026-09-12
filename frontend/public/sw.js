@@ -1,5 +1,5 @@
 /* MayoMandi Service Worker — App Shell caching */
-const CACHE_NAME = "mayomandi-v1";
+const CACHE_NAME = "mayomandi-v2";
 const API_CACHE = "mayomandi-api-v1";
 
 // App shell: core assets that must work offline
@@ -7,9 +7,6 @@ const CORE_ASSETS = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/src/index.css",
-  "/src/main.js",
-  "/src/assets/hero.png",
   "/favicon.svg",
   "/pwa-192.png",
   "/pwa-512.png",
