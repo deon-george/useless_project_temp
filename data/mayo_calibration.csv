@@ -1,0 +1,7 @@
+image_id,actual_mayo_grams,mayo_area_pixels,reference_area_pixels,mayo_reference_ratio,physical_mayo_area,mayo_width,mayo_height
+photo_01,25.0,26800,46200,0.580,5.80,180,190
+photo_02,50.0,52400,46200,1.134,11.34,250,265
+photo_03,75.0,76900,46200,1.664,16.64,305,320
+photo_04,100.0,99800,46200,2.160,21.60,350,365
+photo_05,125.0,121500,46200,2.629,26.29,390,400
+photo_06,150.0,142000,46200,3.073,30.73,425,430

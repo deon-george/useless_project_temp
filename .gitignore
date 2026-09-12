@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.venv/
+venv/
+.venv/
+
+# Backend
+*.db
+mayomandi.db
+
+# Frontend
+node_modules/
+dist/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+.DS_Store
+Thumbs.db
