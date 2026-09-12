@@ -83,7 +83,103 @@ let state = {
 
 let activeCameraStream = null;
 
+// --- PWA: Service Worker registration ---
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .catch(() => {});
+    });
+  }
+}
+
+// --- PWA: Install prompt handling ---
+let deferredPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  window.MAYOMANDI_INSTALLABLE = true;
+  if (isMobile()) {
+    renderInstallHint();
+  }
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredPrompt = null;
+  window.MAYOMANDI_INSTALLABLE = false;
+  hideInstallHint();
+});
+
+function isMobile() {
+  return /iPhone|iPad|iPod|Android/.test(navigator.userAgent) ||
+         (navigator.maxTouchPoints && navigator.maxTouchPoints > 1 && !window.matchMedia("(hover: hover)").matches);
+}
+
+window.triggerPwaInstall = function () {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  }
+};
+
+function renderInstallHint() {
+  hideInstallHint();
+  const banner = document.createElement("div");
+  banner.id = "pwa-install-hint";
+  banner.className = "install-hint";
+  banner.innerHTML = `
+    <button id="pwa-install-btn" class="install-btn">
+      <span class="install-icon">📲</span> Install MayoMandi
+    </button>
+    <button id="pwa-dismiss-hint" class="install-dismiss" aria-label="Dismiss">✕</button>
+  `;
+  document.body.appendChild(banner);
+  document.getElementById("pwa-install-btn").addEventListener("click", () => window.triggerPwaInstall());
+  document.getElementById("pwa-dismiss-hint").addEventListener("click", hideInstallHint);
+  window.__installHintTimer = setTimeout(hideInstallHint, 15000);
+}
+
+function renderIOSInstallHint() {
+  hideInstallHint();
+  const banner = document.createElement("div");
+  banner.id = "pwa-install-hint";
+  banner.className = "install-hint ios";
+  banner.innerHTML = `
+    <div class="ios-instructions">
+      <span class="install-icon">📲</span>
+      <span>Install MayoMandi: tap <strong>Share</strong> → <strong>Add to Home Screen</strong></span>
+    </div>
+    <button id="pwa-dismiss-hint" class="install-dismiss" aria-label="Dismiss">✕</button>
+  `;
+  document.body.appendChild(banner);
+  document.getElementById("pwa-dismiss-hint").addEventListener("click", hideInstallHint);
+  window.__installHintTimer = setTimeout(hideInstallHint, 20000);
+}
+
+window.hideInstallHint = function () {
+  if (window.__installHintTimer) {
+    clearTimeout(window.__installHintTimer);
+    window.__installHintTimer = null;
+  }
+  const existing = document.getElementById("pwa-install-hint");
+  if (existing) existing.remove();
+};
+
+// iOS doesn't fire beforeinstallprompt — show manual instructions
+if (isMobile() && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+  window.addEventListener("load", () => {
+    if (!window.MAYOMANDI_INSTALLABLE && !sessionStorage.getItem("iosInstallDismissed")) {
+      renderIOSInstallHint();
+    }
+  });
+}
+
 // --- Camera Streaming Utilities ---
+
 async function startCamera(videoElementId) {
   try {
     if (activeCameraStream) {
@@ -980,6 +1076,7 @@ window.executeReverseAnalysis = executeReverseAnalysis;
 window.resetReverseCalculator = resetReverseCalculator;
 
 function init() {
+  registerServiceWorker();
   render();
   window.addEventListener("hashchange", () => {
     stopCamera();

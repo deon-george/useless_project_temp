@@ -1288,6 +1288,88 @@ footer strong {
   font-weight: 600;
 }
 
+/* ---- PWA Install Banner ---- */
+.install-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-dark);
+  color: #fff;
+  padding: 10px 16px 10px 14px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  animation: installSlideUp 0.3s ease-out;
+  max-width: calc(100vw - 32px);
+}
+
+@keyframes installSlideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.install-hint .install-icon {
+  font-size: 1.2rem;
+}
+
+.install-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: inherit;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.install-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.install-dismiss {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.install-dismiss:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.install-hint.ios {
+  background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+.install-hint.ios .ios-instructions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+}
+
+.install-hint.ios strong {
+  color: #fff;
+}
 /* ==============================================
    RESPONSIVE MEDIA QUERIES (MOBILE FIRST MINDSET)
    ============================================== */

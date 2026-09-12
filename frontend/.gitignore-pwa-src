@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="90" fill="#fff8f0"/>
+  <!-- Chicken drumstick -->
+  <path fill="#d4a373" d="M256 60c-33 0-80 42-90 52-7 7-10 16-10 26 0 10 3 19 10 26 9 10 57 52 90 52s83-42 90-52c7-7 10-16 10-26s-3-19-10-26c-10-10-57-52-90-52z"/>
+  <path fill="#b8864f" d="M256 180c-28 0-50-22-50-50s22-50 50-50 50 22 50 50-22 50-50 50z"/>
+  <!-- Mayo splat -->
+  <ellipse cx="360" cy="300" rx="55" ry="40" fill="#f0e6d2" stroke="#e5d2a8" stroke-width="3"/>
+  <circle cx="360" cy="300" r="22" fill="#e6a85c"/>
+  <!-- Arc smile above mayo -->
+  <path fill="none" stroke="#45403b" stroke-width="8" stroke-linecap="round" d="M210 310a45 45 0 0 1 90 0"/>
+</svg>
