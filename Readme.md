@@ -36,6 +36,8 @@ An end-to-end traditional computer vision pipeline paired with classical NumPy l
 ---
 ### Google Drive Video Link : https://drive.google.com/file/d/1L2Tohva75o418UeFcd9GkfdK6wYQk2gS/view?usp=sharing
 ### Live Link : https://useless-project-temp-dusky.vercel.app/
+###  Screenshots Google Drive Link: https://drive.google.com/drive/folders/1zmScp4GsQ7Y2FPbP7SLqsYmwnz662xsT?usp=sharing
+
 
 ## ⚠️ Important Scientific Limitation
 
@@ -193,7 +195,6 @@ The entire web interface is optimized for mobile touch devices and all desktop r
 ```
 
 ---
-## Screenshots Google Drive Link: https://drive.google.com/drive/folders/1zmScp4GsQ7Y2FPbP7SLqsYmwnz662xsT?usp=sharing
 
 ## 📂 Physical Calibration Datasets
 
