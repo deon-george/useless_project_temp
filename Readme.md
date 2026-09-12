@@ -1,9 +1,37 @@
-# 🍗 MayoMandi
+<img width="1280" height="640" alt="git (1)" src="https://github.com/user-attachments/assets/8920b256-2ba8-4988-b824-5351134eb4bd" />
+
+# 🍗 MayoMandi 🎯
 
 > **The scientifically unnecessary mandi-to-mayo ratio finder powered by Traditional Computer Vision & Classical NumPy Regression.**
 
-Input or photograph your mandi → MayoMandi calculates the recommended mayonnaise.
-Have mayonnaise? Photograph your mayo → Traditional OpenCV & NumPy least-squares regression calculates how much mandi rice you can eat!
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.141+-009688.svg)](https://fastapi.tiangolo.com/)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Traditional_CV-5C3EE8.svg)](https://opencv.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-Least_Squares_Regression-013243.svg)](https://numpy.org/)
+[![Vite](https://img.shields.io/badge/Vite-Vanilla_JS-646CFF.svg)](https://vitejs.dev/)
+[![Mobile Responsive](https://img.shields.io/badge/Mobile-Responsive-success.svg)](#-5-mobile-responsive-web-experience)
+[![TinkerHub](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)](https://www.tinkerhub.org/)
+[![Useless Projects 3.0](https://img.shields.io/badge/UselessProjects--3.0-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)](https://tinkerhub.org/events/1M8ORET9A1/useless-projects-3.0)
+
+---
+
+## 📋 Basic Details
+
+### Team Name: MayoMandi Team
+
+### Team Members
+- **Team Lead:** Deone George ([@deongeorge](https://github.com/deongeorge))
+
+---
+
+### 💡 Project Description
+**MayoMandi** is a scientifically unnecessary, technically complete full-stack application that calculates the ideal mayonnaise amount for your mandi plate—or in reverse, photograph your mayonnaise and let classical NumPy least-squares regression predict how much mandi rice you are entitled to consume.
+
+### ❓ The Problem (that doesn't exist)
+Nobody agrees on the correct metric ratio of mayonnaise required to accompany authentic mandi rice. Adding too little mayo results in dry, unlubricated rice. Adding too much mayo is culinary criminal behavior. Diners have been forced to guess ratios without rigorous linear algebra, physical calibration markers, or computer vision assistance.
+
+### 💡 The Solution (that nobody asked for)
+An end-to-end traditional computer vision pipeline paired with classical NumPy least-squares regression. Users can snap photos on mobile or desktop; OpenCV isolates food boundaries via multi-color space thresholding and metric reference scaling; NumPy predicts edible quantities; and a fully mobile-responsive interface delivers instantaneous gastronomic verdicts.
 
 ---
 
@@ -91,6 +119,79 @@ $$\text{predicted\_rice} = \beta_0 + \beta_1 \times \text{estimated\_mayo\_grams
 
 ---
 
+### 3. 🧮 Manual Calculator & Uselessness Score Gauge
+- Forward numeric calculation using grams of mandi rice.
+- Dynamic **Engineering Uselessness Gauge** (0% scientific necessity, 100% engineering effort).
+- Complete mathematical breakdown showing each parameter's multiplier impact on final mayonnaise volume.
+
+---
+
+### 4. 📊 Calculation History & Aggregate Analytics
+- Automatic persistent logging of every calculation to SQLite (`mayomandi.db`).
+- Summary analytics endpoint (`/api/history/stats`) tracking total calculations performed, total imaginary mayo grams consumed, and average mayo per calculation.
+- Tabular audit trail showing rice grams, recommended mayo, ratio, spice, dryness, and preference.
+
+---
+
+### 5. 📱 Mobile-First Responsive Web Experience
+The entire web interface is optimized for mobile touch devices and all desktop resolutions:
+- **Swipeable Navigation Tabs:** Header transforms into a clean horizontal scrollable pill bar on mobile viewports for smooth thumb navigation.
+- **2x2 Touch Segmented Controls:** Spice, dryness, and preference pickers adapt into balanced 2x2 grids on screens $\le 640\text{ px}$ with $\ge 46\text{ px}$ touch targets.
+- **Mobile Camera Integration:** Direct support for rear-facing / environment cameras (`playsinline`, `facingMode: "environment"`) with responsive frame capture.
+- **Horizontally Scrollable History Table:** 7-column calculation log wrapped in a touch-scrolling container with mobile swipe hint indicators.
+- **Zero Horizontal Overflow:** Strict layout constraints and dynamic fluid typography (`clamp()`) eliminate horizontal page scrolling on all devices.
+- **iOS Safari Auto-Zoom Prevention:** Form inputs maintain a minimum 16px font size to prevent disorienting mobile browser zooming.
+
+---
+
+### 6. ⚖️ Mayo Dispensing Checker & Empirical Calibration
+- **Dispensing Checker (`/api/vision/check`):** Verifies whether detected mayonnaise in an image satisfies the required amount from a prior mandi recommendation, outputting `ENOUGH` or `NOT ENOUGH` with exact gram discrepancies.
+- **Empirical Calibration API (`/api/vision/calibrate/*`):** Upload real scale samples, extract visual contour features, and fit custom linear models ($y = m \cdot x + c$) using pure NumPy least squares.
+
+---
+
+## 🏗️ System Architecture
+
+```
+[ Mobile / Desktop Browser ]
+         │
+         ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 Frontend (Vite + Vanilla JS)                │
+│  - Mobile Swipe Nav & 2x2 Touch Segmented Controls          │
+│  - Live Webcam / Rear-Facing Camera Stream API              │
+│  - Mandi Vision & Reverse Calculator Photo Views            │
+│  - Horizontally Scrollable Audit History Table              │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ HTTP / Multipart Form Data
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   Backend Layer (FastAPI)                   │
+│  /api/calculate              /api/reverse-calculate         │
+│  /api/vision/mandi           /api/vision/reverse            │
+│  /api/vision/mayo            /api/vision/check              │
+│  /api/vision/calibrate/*     /api/history/*                 │
+└──────────────┬───────────────────────────────┬──────────────┘
+               │                               │
+               ▼                               ▼
+┌──────────────────────────────┐ ┌─────────────────────────────┐
+│  Traditional Computer Vision │ │ Classical Linear Regression │
+│  (OpenCV - No Neural Nets)   │ │ (NumPy np.linalg.lstsq)     │
+│  - Multi-Color HSV/LAB       │ │ - Model: rice = β0 + β1*mayo│
+│  - Morphological Operations  │ │ - Data: rice_mayo_calib.csv │
+│  - ID-1 Card 85.6mm Metric   │ │ - Feature regression model  │
+└──────────────┬───────────────┘ └─────────────┬───────────────┘
+               │                               │
+               └───────────────┬───────────────┘
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│              SQLite Persistence & Analytics Engine          │
+│  - Stores calculations, ratios, timestamps, uselessness %   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
 ## 📂 Physical Calibration Datasets
 
 Stored in `data/` and modular so values can be replaced with real kitchen scale measurements:
@@ -129,16 +230,23 @@ Open your browser at `http://localhost:5173`.
 
 ---
 
-## 📡 API Endpoints
+## 📡 Complete API Reference
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/health` | Health check |
-| POST | `/api/calculate` | Manual numeric forward calculation |
-| POST | `/api/vision/mandi` | Traditional CV Mandi analysis & Mayo recommendation |
-| POST | `/api/vision/reverse` | **Reverse Calculator:** Photo-only OpenCV Mayo estimation + NumPy regression |
-| GET | `/api/history/` | View calculation history |
-| GET | `/api/history/stats` | View aggregate statistics |
+| `GET` | `/health` | Health check |
+| `POST` | `/api/calculate` | Manual numeric forward calculation |
+| `POST` | `/api/reverse-calculate` | Manual numeric reverse calculation |
+| `POST` | `/api/vision/mandi` | Mandi photo analysis: traditional OpenCV rice segmentation & mayo recommendation |
+| `POST` | `/api/vision/reverse` | **Reverse Calculator:** Photo-only OpenCV mayo estimation + NumPy regression |
+| `POST` | `/api/vision/mayo` | Direct mayo vision analysis (spoon, plate, or container mode) |
+| `POST` | `/api/vision/check` | Mayo amount checker: verifies if dispensed mayo meets required mandi threshold |
+| `POST` | `/api/vision/calibrate/sample` | Upload real-world mayo calibration sample with scale weight |
+| `GET` | `/api/vision/calibrate/samples` | List current calibration samples and model fit status |
+| `POST` | `/api/vision/calibrate/fit` | Fits classical regression model ($y = m \cdot x + c$) via `np.linalg.lstsq` |
+| `POST` | `/api/vision/calibrate/reset` | Resets custom calibration samples to empirical baseline model |
+| `GET` | `/api/history/` | View historical calculations log |
+| `GET` | `/api/history/stats` | View aggregate statistics (total calculations, total mayo, averages) |
 
 ---
 
@@ -148,6 +256,40 @@ $$\text{base\_mayo} = \frac{\text{rice}}{4}$$
 
 $$\text{recommended} = \text{base} \times \text{spice\_factor} \times \text{dryness\_factor} \times \text{preference\_factor}$$
 
-- **Spice:** mild (0.85) → medium (1.00) → spicy (1.20) → nuclear (1.50)
-- **Dryness:** moist (0.85) → normal (1.00) → dry (1.15) → sahara (1.35)
-- **Preference:** minimal (0.75) → balanced (1.00) → lover (1.25) → criminal (1.60)
+- **Spice:** `mild` (0.85) → `medium` (1.00) → `spicy` (1.20) → `nuclear` (1.50)
+- **Dryness:** `moist` (0.85) → `normal` (1.00) → `dry` (1.15) → `sahara` (1.35)
+- **Preference:** `minimal` (0.75) → `balanced` (1.00) → `lover` (1.25) → `criminal` (1.60)
+
+---
+
+## 🧪 Running Automated Tests
+
+MayoMandi includes comprehensive automated test suites validating traditional OpenCV segmentation, ID-1 reference card metric calibration, NumPy least-squares regression, and all FastAPI endpoints:
+
+```bash
+# Run backend pytest suite (11 passing tests)
+cd backend
+python3 -m pytest
+
+# Run frontend linter and production build
+cd ../frontend
+npm run lint
+npm run build
+```
+
+---
+
+## 👥 Team Contributions
+
+- **Deone George:** Full-stack implementation, traditional computer vision pipeline design (HSV/LAB segmentation, morphological filtering, ID-1 card metric calibration), classical NumPy least-squares regression engine, FastAPI backend architecture, SQLite persistence, Vite/Vanilla JS SPA, and mobile-first responsive design.
+
+---
+
+<div align="center">
+
+Made with ❤️ at **TinkerHub Useless Projects** 
+
+[![Static Badge](https://img.shields.io/badge/TinkerHub-24?color=%23000000&link=https%3A%2F%2Fwww.tinkerhub.org%2F)](https://www.tinkerhub.org/)
+[![Static Badge](https://img.shields.io/badge/UselessProjects--3.0-26?link=https%3A%2F%2Ftinkerhub.org%2Fevents%2F1M8ORET9A1%2Fuseless-projects-3.0)](https://tinkerhub.org/events/1M8ORET9A1/useless-projects-3.0)
+
+</div>

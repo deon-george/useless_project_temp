@@ -146,7 +146,7 @@ function renderFrame(route, contentHtml) {
     <div class="app">
       <header class="site-header">
         <a href="#/" class="logo"><span>🍗</span> Mayo<em>Mandi</em></a>
-        <nav>
+        <nav class="nav-bar">
           <a href="#/" class="${activeNav("home")}">Home</a>
           <a href="#/mandi-vision" class="${activeNav("mandi-vision")}">🍗 Mandi Vision</a>
           <a href="#/reverse" class="${activeNav("reverse")}">🥄 Reverse Calculator</a>
@@ -369,17 +369,17 @@ function renderMandiVisionResult(result) {
         ` : ""}
 
         <!-- Estimation Card -->
-        <div style="display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:18px; margin:14px 0;">
-          <div style="text-align:center;">
-            <span style="font-size:0.85rem; color:var(--text); text-transform:uppercase; font-weight:700;">Estimated Rice Quantity</span>
-            <div style="font-size:2.8rem; font-weight:800; color:var(--accent-dark);">${intOrFloat(v.estimated_weight_grams)} g</div>
-            <div style="font-size:0.95rem; font-weight:600; color:var(--text-h);">Estimated Range: ${v.uncertainty_range_label}</div>
+        <div class="estimation-summary-box">
+          <div class="est-rice-group">
+            <span class="est-sub-label">Estimated Rice Quantity</span>
+            <div class="est-main-grams">${intOrFloat(v.estimated_weight_grams)} g</div>
+            <div class="est-range-text">Estimated Range: ${v.uncertainty_range_label}</div>
           </div>
-          <div style="text-align:center; margin-top:8px;">
+          <div class="est-conf-group">
             <span class="confidence-pill ${v.confidence >= 80 ? "confidence-high" : "confidence-med"}">
               Confidence: ${v.confidence}%
             </span>
-            <p style="font-size:0.82rem; color:var(--text); margin:6px 0 0;">
+            <p class="est-card-note">
               ${cal.reference_card_detected ? "💳 Physical card calibrated (85.6mm)" : "⚠️ Fallback plate geometry"}
             </p>
           </div>
@@ -417,12 +417,12 @@ function renderMandiVisionResult(result) {
             ${rec.verdict}
           </div>
 
-          <div style="margin-top:16px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <div class="result-action-buttons">
             <button class="primary-btn" onclick="resetMandiVision()">
               🔄 Analyze Another Mandi
             </button>
             <a href="#/reverse" class="secondary-btn">
-              🥄 Have Mayo? Go to Reverse Calculator
+              🥄 Have Mayo? Reverse Calculator
             </a>
           </div>
         </div>
@@ -520,32 +520,32 @@ function renderReverse() {
           </div>
         ` : `
           <!-- The exact container requested by the user -->
-          <div class="card" style="border: 2px dashed var(--accent); background: var(--bg-alt); text-align: center; padding: 40px 24px; box-shadow: none; margin: 16px auto;">
-            <div style="font-size: 3.6rem; margin-bottom: 8px;">🥄</div>
-            <h3 style="font-size: 1.45rem; margin: 0 0 10px; color: var(--text-h);">Photograph your mayo</h3>
-            <p style="color: var(--text); font-size: 1.05rem; margin: 0 0 24px; line-height: 1.5;">
+          <div class="card reverse-upload-card">
+            <div class="reverse-hero-icon">🥄</div>
+            <h3 class="reverse-title">Photograph your mayo</h3>
+            <p class="reverse-desc">
               Place your mayonnaise on the<br><strong>MayoMandi reference plate/card</strong>.
             </p>
 
             ${r.previewUrl ? `
-              <div style="margin: 16px auto; max-width: 320px; border-radius: 10px; overflow: hidden; border: 2px solid var(--border);">
-                <img src="${r.previewUrl}" alt="Selected Mayo Preview" style="width: 100%; display: block;" />
+              <div class="reverse-preview-wrapper">
+                <img src="${r.previewUrl}" alt="Selected Mayo Preview" />
               </div>
             ` : ""}
 
-            <div class="vision-actions" style="justify-content: center; gap: 12px; margin-top: 14px;">
-              <label class="primary-btn" style="cursor: pointer; padding: 13px 24px; font-size: 1.05rem;">
+            <div class="vision-actions">
+              <label class="primary-btn file-upload-btn">
                 📷 Upload Mayo Photo
                 <input type="file" id="reverse-file-input" accept="image/*" style="display: none;" onchange="handleReverseFileSelect(event)" />
               </label>
-              <button type="button" class="secondary-btn" style="padding: 12px 20px;" onclick="toggleReverseCamera(true)">
+              <button type="button" class="secondary-btn camera-open-btn" onclick="toggleReverseCamera(true)">
                 📸 Use Camera
               </button>
             </div>
 
             ${r.selectedFile ? `
-              <div style="margin-top: 22px;">
-                <button type="button" class="primary-btn" style="background: #16a34a; font-size: 1.15rem; padding: 14px 32px; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);" onclick="executeReverseAnalysis()">
+              <div class="reverse-submit-container">
+                <button type="button" class="primary-btn analyze-action-btn" onclick="executeReverseAnalysis()">
                   🥄 ANALYZE MY MAYO
                 </button>
               </div>
@@ -591,15 +591,15 @@ function renderReverseResult(r) {
         ` : ""}
 
         <!-- MAYO DETECTED SECTION -->
-        <div style="margin: 20px 0; padding: 18px; background: var(--bg); border-radius: 12px; border: 1px solid var(--border);">
-          <div style="font-size: 1.15rem; font-weight: 800; color: var(--text-h); margin-bottom: 6px;">
+        <div class="reverse-detected-box">
+          <div class="reverse-detected-title">
             🥄 MAYO DETECTED
           </div>
-          <div style="font-size: 0.88rem; color: var(--text); font-weight: 600;">Estimated:</div>
-          <div style="font-size: 2.8rem; font-weight: 800; color: var(--accent-dark); line-height: 1.1; margin: 4px 0;">
+          <div class="reverse-detected-sub">Estimated:</div>
+          <div class="reverse-mayo-val">
             ${Math.round(r.estimated_mayo_grams)} g
           </div>
-          <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-h); margin: 6px 0;">
+          <div class="reverse-detected-range">
             Estimated range: <strong>${r.uncertainty_range_label}</strong>
           </div>
           <div>
@@ -609,19 +609,19 @@ function renderReverseResult(r) {
           </div>
         </div>
 
-        <div style="border-top: 2px dashed var(--border); margin: 24px auto; width: 85%;"></div>
+        <div class="dashed-divider"></div>
 
         <!-- YOU CAN EAT SECTION -->
-        <div style="margin: 20px 0; padding: 22px; background: #f0fdf4; border-radius: 14px; border: 2px solid #86efac;">
-          <div style="font-size: 1.25rem; font-weight: 800; color: #166534; margin-bottom: 6px;">
+        <div class="reverse-eat-box">
+          <div class="reverse-eat-title">
             🍚 YOU CAN EAT
           </div>
-          <div style="font-size: 3.2rem; font-weight: 900; color: #15803d; line-height: 1.1;">
+          <div class="reverse-eat-val">
             ≈ ${Math.round(r.predicted_rice_grams)} g mandi
           </div>
         </div>
 
-        <div style="border-top: 2px dashed var(--border); margin: 24px auto; width: 85%;"></div>
+        <div class="dashed-divider"></div>
 
         <!-- METHOD & HUMOROUS MESSAGE -->
         <div style="margin: 16px 0; font-size: 0.95rem; color: var(--text); line-height: 1.5;">
@@ -634,7 +634,7 @@ function renderReverseResult(r) {
         </div>
 
         <div style="margin-top: 24px;">
-          <button type="button" class="primary-btn" onclick="resetReverseCalculator()">
+          <button type="button" class="primary-btn full-width-mobile" onclick="resetReverseCalculator()">
             📷 Photograph Another Mayo
           </button>
         </div>
@@ -883,29 +883,44 @@ async function renderHistoryContent() {
     `).join("");
 
     const statsHtml = state.stats ? `
-      <div class="stats-summary">
-        <p><strong>Total calculations:</strong> ${state.stats.total_calculations}</p>
-        <p><strong>Total imaginary mayo:</strong> ${state.stats.total_imaginary_mayo_grams} g</p>
-        <p><strong>Average mayo per calc:</strong> ${state.stats.average_mayo_per_calc} g</p>
+      <div class="stats-summary-grid">
+        <div class="stat-pill-card">
+          <span class="stat-pill-label">Total Calculations</span>
+          <span class="stat-pill-val">${state.stats.total_calculations}</span>
+        </div>
+        <div class="stat-pill-card">
+          <span class="stat-pill-label">Total Imaginary Mayo</span>
+          <span class="stat-pill-val">${state.stats.total_imaginary_mayo_grams} g</span>
+        </div>
+        <div class="stat-pill-card">
+          <span class="stat-pill-label">Average Mayo / Calc</span>
+          <span class="stat-pill-val">${state.stats.average_mayo_per_calc} g</span>
+        </div>
       </div>
     ` : "";
 
     const html = `
       <div class="page history">
-        <div class="card">
+        <div class="card wide">
           <h2>📊 Mayo History</h2>
+          <p class="subtitle">Complete audit trail of all mandi and mayo ratio calculations</p>
           ${statsHtml}
           ${state.history.length === 0
-            ? "<p>No history yet. Calculate some mayo!</p>"
+            ? "<p style='text-align:center; padding: 24px; color:var(--text);'>No history yet. Calculate some mayo!</p>"
             : `
-            <table class="history-table">
-              <thead>
-                <tr>
-                  <th>Rice (g)</th><th>Mayo (g)</th><th>Ratio</th><th>Uselessness</th><th>Spice</th><th>Dryness</th><th>Preference</th>
-                </tr>
-              </thead>
-              <tbody>${rows}</tbody>
-            </table>
+            <div class="history-table-container">
+              <div class="mobile-table-hint">👉 Swipe horizontally to view all calculation columns</div>
+              <div class="history-table-wrapper">
+                <table class="history-table">
+                  <thead>
+                    <tr>
+                      <th>Rice (g)</th><th>Mayo (g)</th><th>Ratio</th><th>Uselessness</th><th>Spice</th><th>Dryness</th><th>Preference</th>
+                    </tr>
+                  </thead>
+                  <tbody>${rows}</tbody>
+                </table>
+              </div>
+            </div>
             `
           }
         </div>
