@@ -58,14 +58,17 @@ self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // API requests — network first, cache fallback
+  // API requests — network first, cache GET responses only (Cache API doesn't support POST)
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/health")) {
     event.respondWith(
-      fetch(request).then((response) => {
-        const cloned = response.clone();
-        caches.open(API_CACHE).then((cache) => cache.put(request, cloned));
+      fetch(event.request).then((response) => {
+        // Only cache GET responses; POST requests must always hit the network
+        if (event.request.method === "GET") {
+          const cloned = response.clone();
+          caches.open(API_CACHE).then((cache) => cache.put(event.request, cloned));
+        }
         return response;
-      }).catch(() => caches.match(request)),
+      }).catch(() => caches.match(event.request)),
     );
     return;
   }

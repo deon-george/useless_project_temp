@@ -371,7 +371,7 @@ def generate_mayo_overlay(
 
     # Header banner
     banner_h = 75
-    banner = np.zeros((banner_h, w, 3), dtype=np.uint8)
+    banner = np.zeros((banner_h, overlay.shape[1], 3), dtype=np.uint8)
     banner[:] = (25, 25, 25)
 
     grams = result_info.get("estimated_mayo_grams", 0.0)
@@ -427,6 +427,7 @@ def process_mayo_image(
     if max(h, w) > max_dim:
         scale = max_dim / float(max(h, w))
         image = cv2.resize(image, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_AREA)
+        h, w = image.shape[:2]
 
     # Check for reference card
     card_info = detect_reference_card(image)
@@ -577,6 +578,7 @@ def process_reverse_mayo_photo(image_bytes: bytes) -> Dict[str, Any]:
     if max(h, w) > max_dim:
         scale = max_dim / float(max(h, w))
         image = cv2.resize(image, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_AREA)
+        h, w = image.shape[:2]
 
     # 1. Reference card detection
     card_info = detect_reference_card(image)
@@ -658,7 +660,7 @@ def process_reverse_mayo_photo(image_bytes: bytes) -> Dict[str, Any]:
 
     # Banner
     banner_h = 75
-    banner = np.zeros((banner_h, w, 3), dtype=np.uint8)
+    banner = np.zeros((banner_h, overlay.shape[1], 3), dtype=np.uint8)
     banner[:] = (25, 25, 25)
 
     cv2.putText(
