@@ -32,12 +32,11 @@ Nobody agrees on the correct metric ratio of mayonnaise required to accompany au
 
 ### 💡 The Solution (that nobody asked for)
 An end-to-end traditional computer vision pipeline paired with classical NumPy least-squares regression. Users can snap photos on mobile or desktop; OpenCV isolates food boundaries via multi-color space thresholding and metric reference scaling; NumPy predicts edible quantities; and a fully mobile-responsive interface delivers instantaneous gastronomic verdicts.
+![HomePage](HomePage.png)
 
 ---
 ### Google Drive Video Link : https://drive.google.com/file/d/1L2Tohva75o418UeFcd9GkfdK6wYQk2gS/view?usp=sharing
 ### Live Link : https://useless-project-temp-dusky.vercel.app/
-###  Screenshots Google Drive Link: https://drive.google.com/drive/folders/1zmScp4GsQ7Y2FPbP7SLqsYmwnz662xsT?usp=sharing
-
 
 ## ⚠️ Important Scientific Limitation
 
@@ -84,7 +83,7 @@ Upload or capture a photograph of your mandi plate:
 - **Morphological Cleanup:** Median filtering, opening, closing, and connected-component area filtering to isolate the continuous rice mound.
 - **Mound Quantity Model:** Estimates 3D mound height from projected 2D surface area and applies bulk density ($\sim 0.80\text{ g/cm}^3$) to derive estimated rice grams and uncertainty bounds.
 - **Mayo Recommendation:** Applies the M.A.N.D.I. algorithm for spice, dryness, and preference factors.
-
+![MandiVision](MandiVision.png)
 ---
 
 ### 2. 🥄 Reverse Calculator (Photo ONLY)
@@ -120,13 +119,14 @@ $$X = \begin{bmatrix} 1 & \text{mayo}_1 \\ 1 & \text{mayo}_2 \\ \vdots & \vdots 
 $$\beta = \text{np.linalg.lstsq}(X, y, \text{rcond=None})[0]$$
 
 $$\text{predicted\_rice} = \beta_0 + \beta_1 \times \text{estimated\_mayo\_grams}$$
-
+![MayoVision](MayoVision.png)
 ---
 
 ### 3. 🧮 Manual Calculator & Uselessness Score Gauge
 - Forward numeric calculation using grams of mandi rice.
 - Dynamic **Engineering Uselessness Gauge** (0% scientific necessity, 100% engineering effort).
 - Complete mathematical breakdown showing each parameter's multiplier impact on final mayonnaise volume.
+![ManualCalculator](ManualCalculator.png)
 
 ---
 
@@ -134,7 +134,7 @@ $$\text{predicted\_rice} = \beta_0 + \beta_1 \times \text{estimated\_mayo\_grams
 - Automatic persistent logging of every calculation to SQLite (`mayomandi.db`).
 - Summary analytics endpoint (`/api/history/stats`) tracking total calculations performed, total imaginary mayo grams consumed, and average mayo per calculation.
 - Tabular audit trail showing rice grams, recommended mayo, ratio, spice, dryness, and preference.
-
+![History](History.png)
 ---
 
 ### 5. 📱 Mobile-First Responsive Web Experience
